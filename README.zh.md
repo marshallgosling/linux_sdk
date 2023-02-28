@@ -7,4 +7,10 @@
 
 **third_party**目录包括了一些有用的第三方库，可以认为这部分与SDK本身无关，你无需过分关注这一目录。
 
+**CENTOS7**如果使用CENTOS7，需要修改CMAKELISTS.txt，增加 -std=c++11， 使用c++ 11标准
+```
+set(CMAKE_CXX_FLAGS
+    "${CMAKE_CXX_FLAGS} -std=c++11 -fno-omit-frame-pointer -Wno-unused-command-line-argument ${sanitizer}")
+
+```
 **上述** 文件夹中均有更加详细的ReadMe说明，强烈建议你仔细阅读每个ReadMe文档，可以帮助你更顺利的使用Agora Linux Gateway！
