@@ -26,10 +26,10 @@ endif()
 
 # include header path
 include_directories(
-  "${THIRD_PARTY}/include"
-  "${THIRD_PARTY}/http_parser/include"
-  "${THIRD_PARTY}/json_parser/include"
-  "${THIRD_PARTY}/opusfile_parser/include"
+  # "${THIRD_PARTY}/include"
+  # "${THIRD_PARTY}/http_parser/include"
+  # "${THIRD_PARTY}/json_parser/include"
+  # "${THIRD_PARTY}/opusfile_parser/include"
   "${CMAKE_SOURCE_DIR}"
   "${AGORA_MEDIA_SDK_HEADER_DIR}/include")
 
