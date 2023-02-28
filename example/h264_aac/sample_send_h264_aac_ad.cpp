@@ -93,10 +93,10 @@
 #define DEFAULT_AUDIO_FRAME_DURATION (243)
 #define DEFAULT_NUM_OF_CHANNELS (2)
 #define DEFAULT_FRAME_RATE (30)
-#define DEFAULT_AUDIO_FILE "test_data/1.aac"
-#define DEFAULT_VIDEO_FILE "test_data/1.h264"
-#define DEFAULT_AD_AUDIO_FILE "test_data/2.aac"
-#define DEFAULT_AD_VIDEO_FILE "test_data/2.h264"
+#define DEFAULT_AUDIO_FILE "media/audio.aac"
+#define DEFAULT_VIDEO_FILE "media/video.h264"
+#define DEFAULT_AD_AUDIO_FILE "media/ad_audio.aac"
+#define DEFAULT_AD_VIDEO_FILE "media/ad_video.h264"
 
 struct SampleOptions {
   std::string appId;
@@ -109,7 +109,7 @@ struct SampleOptions {
   std::string localIP;
   std::string logPath;
   int timeInterval = 10000;
-  int adMode = 0;
+  int adMode = 1;
   struct {
     int sampleRate = DEFAULT_SAMPLE_RATE;
     int numOfChannels = DEFAULT_NUM_OF_CHANNELS;
@@ -373,13 +373,6 @@ int main(int argc, char* argv[]) {
     AG_LOG(ERROR, "Failed to create media node factory!");
   }
 
-  // Create audio data sender
-  // agora::agora_refptr<agora::rtc::IAudioPcmDataSender> audioFrameSender =
-  //     factory->createAudioPcmDataSender();
-  // if (!audioFrameSender) {
-  //   AG_LOG(ERROR, "Failed to create audio data sender!");
-  //   return -1;
-  // }
   // Create audio data sender
   agora::agora_refptr<agora::rtc::IAudioEncodedFrameSender> audioFrameSender =
       factory->createAudioEncodedFrameSender();

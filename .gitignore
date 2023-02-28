@@ -1,4 +1,5 @@
 /example/build
+/example/media
 /example/agora*
 /example/crash*
 /example/xdump_config
