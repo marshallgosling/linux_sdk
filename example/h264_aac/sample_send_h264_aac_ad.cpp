@@ -280,17 +280,17 @@ int main(int argc, char* argv[]) {
   optParser.add_long_opt("channelId", &options.channelId, "Channel Id / must");
   optParser.add_long_opt("userId", &options.userId, "User Id / default is 0");
   optParser.add_long_opt("audioFile", &options.audioFile,
-                         "The audio file in raw PCM format to be sent");
+                         "The audio file in AAC format to be sent");
   optParser.add_long_opt("videoFile", &options.videoFile,
                          "The video file in H264 format to be sent");
   optParser.add_long_opt("audioAdFile", &options.audioAdFile,
-                         "The audio file in raw PCM format to be sent");
+                         "The audio file in AAC format to be sent");
   optParser.add_long_opt("videoAdFile", &options.videoAdFile,
                          "The video file in H264 format to be sent");
   optParser.add_long_opt("sampleRate", &options.audio.sampleRate,
-                         "Sample rate for the PCM file to be sent");
+                         "Sample rate for the AAC file to be sent");
   optParser.add_long_opt("numOfChannels", &options.audio.numOfChannels,
-                         "Number of channels for the PCM file to be sent");
+                         "Number of channels for the AAC file to be sent");
   optParser.add_long_opt("fps", &options.video.frameRate,
                          "Target frame rate for sending the video stream");
   optParser.add_long_opt("bwe", &options.video.showBandwidthEstimation,
