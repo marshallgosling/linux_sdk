@@ -16,6 +16,7 @@ class HelperAacFileParser {
   std::unique_ptr<HelperAudioFrame> getAudioFrame(int frameSizeDuration);
   bool getEndOfFileTag();
   void setOnce(bool once);
+  void setFileParseRestart();
 
  private:
   std::string file_path_;

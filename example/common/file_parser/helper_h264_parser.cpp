@@ -148,6 +148,7 @@ bool HelperH264FileParser::initialize()
 void HelperH264FileParser::setFileParseRestart()
 {
 	data_offset_ = 0;
+	end_of_file_ = false;
 }
 
 void HelperH264FileParser::_getH264Frame(std::unique_ptr<HelperH264Frame> &h264Frame,

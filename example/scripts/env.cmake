@@ -20,5 +20,7 @@ find_path(third_party_path NAMES third-party PATHS ${CMAKE_SOURCE_DIR} ${CMAKE_S
 set(THIRD_PARTY ${third_party_path}/third-party)
 
 find_library(LIB_SDK NAMES agora_rtc_sdk agora-rtc-sdk agora-rtsa-sdk PATHS ${CMAKE_SOURCE_DIR}/../agora_sdk/ NO_DEFAULT_PATH REQUIRED)
+find_library(HIREDIS_LIB_DIR hiredis)
+find_library(REDIS_PLUS_PLUS_LIB_DIR redis++)
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath=.:../agora_sdk/:../../agora_sdk/")

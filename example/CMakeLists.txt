@@ -17,7 +17,7 @@ set(AGORA_MEDIA_SDK_HEADER_DIR ${CMAKE_SOURCE_DIR}/../agora_sdk)
 set(CMAKE_DEBUG_POSTFIX "")
 set(CMAKE_RELEASE_POSTFIX "")
 set(CMAKE_CXX_FLAGS
-    "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -Wno-unused-command-line-argument ${sanitizer}")
+    "${CMAKE_CXX_FLAGS} -std=c++11 -fno-omit-frame-pointer -Wno-unused-command-line-argument ${sanitizer}")
 
 if("${LICENSE_CHECK}" STREQUAL "y")
   message("license check is enabled")
@@ -26,16 +26,16 @@ endif()
 
 # include header path
 include_directories(
-  # "${THIRD_PARTY}/include"
-  # "${THIRD_PARTY}/http_parser/include"
+  "${THIRD_PARTY}/include"
+  "${THIRD_PARTY}/sw/redis++"
   # "${THIRD_PARTY}/json_parser/include"
-  # "${THIRD_PARTY}/opusfile_parser/include"
+  # "${THIRD_PARTY}/opusfile_parser/include"c
   "${CMAKE_SOURCE_DIR}"
   "${AGORA_MEDIA_SDK_HEADER_DIR}/include")
 
 # Link common libs
 link_directories(${AGORA_MEDIA_SDK_DIR})
-link_libraries(${LIB_SDK} ${LIB_THREAD})
+link_libraries(${LIB_SDK} ${LIB_THREAD} ${HIREDIS_LIB_DIR} ${REDIS_PLUS_PLUS_LIB_DIR})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/out/)
 

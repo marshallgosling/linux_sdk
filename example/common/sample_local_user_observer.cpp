@@ -101,9 +101,10 @@ void SampleLocalUserObserver::onFirstRemoteVideoDecoded(agora::user_id_t userId,
 	// x_offset_ += 300;
 	// y_offset_ += 300;
 	if (video_mixer_ && enable_video_mix_) {
-		remote_source_map_[std::string(userId)] = videoInfo(width, height,false);
+		remote_source_map_[std::string(userId)] = videoInfo(width, height, 0, false);
 		x_offset_ = 0;
 		y_offset_ = 0;
+		video_mixer_->setBackground(1920, 1080, 15);
 		for (auto it = remote_source_map_.begin(); it != remote_source_map_.end(); it++) {
 			video_mixer_->setStreamLayout(it->first.c_str(), calculate_layout(it->second.width,it->second.height));
 		}
@@ -137,29 +138,27 @@ void SampleLocalUserObserver::onUserVideoTrackStateChanged(
     agora::agora_refptr<agora::rtc::IRemoteVideoTrack> videoTrack,
     agora::rtc::REMOTE_VIDEO_STATE state,
     agora::rtc::REMOTE_VIDEO_STATE_REASON reason, int elapsed) {
-   if(!(video_mixer_ && enable_video_mix_)) return;
-  if (state == 0) {
-	  if(remote_source_map_.find(std::string(userId))!=remote_source_map_.end())
-    remote_source_map_[std::string(userId)].muted = true;
-    x_offset_ = 0;
-    y_offset_ = 0;
-    for (auto it = remote_source_map_.begin(); it != remote_source_map_.end();
-         it++) {
-	if(!it->second.muted)
-      video_mixer_->setStreamLayout(it->first.c_str(), calculate_layout(it->second.width,it->second.height));
-    }
-    video_mixer_->refresh();
-   }else if(state == 1){
-	  if(remote_source_map_.find(std::string(userId))!=remote_source_map_.end())
-	   	remote_source_map_[std::string(userId)].muted = false;
-    x_offset_ = 0;
-    y_offset_ = 0;
-    for (auto it = remote_source_map_.begin(); it != remote_source_map_.end();
-         it++) {
-	if(!it->second.muted)
-      video_mixer_->setStreamLayout(it->first.c_str(), calculate_layout(it->second.width,it->second.height));
-    }
-    video_mixer_->refresh();
+	if(!(video_mixer_ && enable_video_mix_)) return;
+	if (state == 0) {
+		if(remote_source_map_.find(std::string(userId))!=remote_source_map_.end())
+			remote_source_map_[std::string(userId)].muted = true;
+		x_offset_ = 0;
+		y_offset_ = 0;
+		for (auto it = remote_source_map_.begin(); it != remote_source_map_.end(); it++) {
+			if(!it->second.muted)
+				video_mixer_->setStreamLayout(it->first.c_str(), calculate_layout(it->second.width,it->second.height));
+		}
+		video_mixer_->refresh();
+	}else if(state == 1){
+		if(remote_source_map_.find(std::string(userId))!=remote_source_map_.end())
+			remote_source_map_[std::string(userId)].muted = false;
+		x_offset_ = 0;
+		y_offset_ = 0;
+		for (auto it = remote_source_map_.begin(); it != remote_source_map_.end(); it++) {
+			if(!it->second.muted)
+				video_mixer_->setStreamLayout(it->first.c_str(), calculate_layout(it->second.width,it->second.height));
+		}
+		video_mixer_->refresh();
    }
 }
 

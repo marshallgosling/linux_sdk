@@ -23,9 +23,10 @@
 struct videoInfo{
   int width;
   int height;
+  int type;
   bool muted;
-  videoInfo():width(0),height(0),muted(true) {};
-  videoInfo(int w ,int h ,bool mute):width(w),height(h),muted(mute) {};
+  videoInfo():width(0),height(0),type(0),muted(true) {};
+  videoInfo(int w ,int h , int t, bool mute):width(w),height(h),type(t),muted(mute) {};
 };
 
 class SampleLocalUserObserver : public agora::rtc::ILocalUserObserver {
@@ -88,6 +89,11 @@ void onStreamMessage(agora::user_id_t userId, int streamId, const char* data, si
 
   void setVideoMixer( agora::agora_refptr<agora::rtc::IVideoMixerSource> video_mixer){
        video_mixer_ = video_mixer;
+  }
+
+  void addImageSource(std::string id, agora::rtc::MixerLayoutConfig config, int width, int height) {
+    video_mixer_->addImageSource(id.c_str(), config);
+    remote_source_map_[id] = videoInfo(width, height, 1, false);
   }
 
  public:

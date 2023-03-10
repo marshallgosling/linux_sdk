@@ -79,6 +79,12 @@ void HelperAacFileParser::setOnce(bool once)
 	only_once_ = once;
 }
 
+void HelperAacFileParser::setFileParseRestart()
+{
+	data_offset_ = 0;
+	end_of_file_ = false;
+}
+
 std::unique_ptr<HelperAudioFrame> HelperAacFileParser::getAudioFrame(int frameSizeDuration) {
   std::unique_ptr<HelperAudioFrame> audioFrame = nullptr;
   AACAudioFrame aacframe;
