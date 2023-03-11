@@ -113,3 +113,36 @@ $ redis-cli
   127.0.0.1:6379> rpush sample_queue switch
 
 ```
+
+
+### Redis client thread
+
+Using a thread to handle the redis queue commands
+
+```
+static void SampleReadRedisTask(const SampleOptions& options, bool& exitFlag) {
+  std::string url = "tcp://";
+  url.append(options.redisIP);
+  auto redis = sw::redis::Redis(url);
+  printf("redis thread\n");
+  while (!exitFlag) {
+    auto command = redis.lpop(options.redisQueue); // lpop one queue command
+    if (command) {
+      if( *command == "switch") { // command key name
+        adMode = true;      // do your owner logic
+      }
+    }
+    usleep(10000);
+  }
+}
+
+```
+
+
+In the main function, create a thread instance 
+```
+
+std::thread readRedisThread(SampleReadRedisTask, options, std::ref(exitFlag));
+readRedisThread.join();
+
+```
